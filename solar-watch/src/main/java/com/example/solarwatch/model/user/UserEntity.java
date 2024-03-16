@@ -9,6 +9,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long user_id;
     private String username;
+    private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -27,6 +28,14 @@ public class UserEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

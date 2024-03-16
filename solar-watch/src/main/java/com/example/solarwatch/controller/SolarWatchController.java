@@ -19,7 +19,7 @@ public class SolarWatchController {
         this.solarWatchService = solarWatchService;
     }
 
-    @GetMapping("/sunrise-sunset")
+    @GetMapping("/api/sunrise-sunset")
     public ResponseEntity<SunriseSunsetDTO> getSunriseSunset(
             @RequestParam String city,
             @RequestParam String date) {

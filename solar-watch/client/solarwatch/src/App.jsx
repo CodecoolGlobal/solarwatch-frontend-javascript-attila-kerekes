@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { Navigate, useRoutes } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import UserRegisterPage from './components/UserRegisterPage';
+import AdminRegisterPage from './components/AdminRegisterPage';
+import LoginPage from './components/LoginPage';
+import SolarWatchPage from './components/SolarWatchPage';
+import AdminSolarWatchPage from './components/AdminSolarWatchPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const routes = useRoutes([
+        {
+            element: isAuthenticated ?
+                (isAdmin ? <Navigate to="/solar-watch-admin" /> : <SolarWatchPage />)
+                : <Navigate to="/login" />,
+            path: '/solar-watch',
+        },
+        {
+            element: isAuthenticated ?
+                (isAdmin ? <AdminSolarWatchPage /> : <Navigate to="/solar-watch" />)
+                : <Navigate to="/login" />,
+            path: '/solar-watch-admin',
+        },
+        {
+            element: <HomePage />,
+            path: '/'
+        },
+        {
+            element: <UserRegisterPage />,
+            path: '/user/register'
+        },
+        {
+            element: <AdminRegisterPage />,
+            path: '/admin/register'
+        },
+        {
+            element: <LoginPage setIsAuthenticated={setIsAuthenticated} setIsAdmin={setIsAdmin} />,
+            path: '/login'
+        }
+    ]);
+
+    return routes;
 }
 
-export default App
+export default App;

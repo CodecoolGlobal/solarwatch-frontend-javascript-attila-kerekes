@@ -62,10 +62,14 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("user/register").permitAll()
-                                .requestMatchers("user/register/admin").permitAll()
-                                .requestMatchers("user/signin").permitAll()
-                                .requestMatchers("error").permitAll()
+                        auth
+                                .requestMatchers("api/user/register").permitAll()
+                                .requestMatchers("api/user/register/admin").permitAll()
+                                .requestMatchers("api/user/signin").permitAll()
+                                .requestMatchers("api/sunrise-sunset").permitAll()
+                                .requestMatchers("api/admin/cities/**").permitAll()
+                                .requestMatchers("api/admin/sunrisesunset/**").permitAll()
+                                .requestMatchers("api/error").permitAll()
                                 .anyRequest().authenticated()
                 );
 

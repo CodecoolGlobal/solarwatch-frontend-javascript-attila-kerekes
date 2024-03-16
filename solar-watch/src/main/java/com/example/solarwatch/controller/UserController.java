@@ -1,6 +1,7 @@
 package com.example.solarwatch.controller;
 
 
+import com.example.solarwatch.dto.user.CreateUserRequest;
 import com.example.solarwatch.dto.user.JwtResponse;
 import com.example.solarwatch.dto.user.UserRequest;
 import com.example.solarwatch.model.user.Role;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> createUser(@RequestBody UserRequest signUpRequest) {
+    public ResponseEntity<Void> createUser(@RequestBody CreateUserRequest signUpRequest) {
 
         if (userRepository.findByUsername(signUpRequest.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -50,6 +51,7 @@ public class UserController {
 
         UserEntity user = new UserEntity();
         user.setUsername(signUpRequest.getUsername());
+        user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
         user.setRole(Role.ROLE_USER);
 
@@ -58,9 +60,10 @@ public class UserController {
     }
 
     @PostMapping("/register/admin")
-    public ResponseEntity<Void> registerAdmin(@RequestBody UserRequest signUpRequest) {
+    public ResponseEntity<Void> registerAdmin(@RequestBody CreateUserRequest signUpRequest) {
         UserEntity adminUser = new UserEntity();
         adminUser.setUsername(signUpRequest.getUsername());
+        adminUser.setEmail(signUpRequest.getEmail());
         adminUser.setPassword(encoder.encode(signUpRequest.getPassword()));
         adminUser.setRole(Role.ROLE_ADMIN);
 
@@ -76,10 +79,6 @@ public class UserController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
-//        User userDetails = (User) authentication.getPrincipal();
-//
-//        return ResponseEntity.ok(new JwtResponse(jwt, loginRequest.getUsername(), Role.ROLE_USER));
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
