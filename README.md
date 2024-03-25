@@ -1,47 +1,65 @@
-Project Name
-Short description of the project.
+Solar Watch Application
+The Solar Watch Application is a web application designed to provide users with information about sunrise and sunset times for different cities. This README file provides an overview of the application's structure, functionality, and deployment instructions.
 
 Table of Contents
-Introduction
 Features
+Technologies Used
 Getting Started
+Prerequisites
 Installation
 Usage
 Contributing
 License
-Acknowledgements
-Introduction
-Briefly introduce the project, its purpose, and any relevant background information. Include what problem the project aims to solve or what value it provides to users.
-
 Features
-Highlight the key features and functionalities of the project. This section can also include bullet points or a feature list.
-
-Feature 1
-Feature 2
-Feature 3
+Sunrise/Sunset Data: Retrieve sunrise and sunset times for a specified city and date.
+City Management: Add, update, and delete cities to track sunrise and sunset times.
+User Authentication: User registration and login with role-based access control.
+Technologies Used
+Spring Boot: Backend framework for building RESTful APIs and handling business logic.
+React.js: Frontend library for building interactive user interfaces.
+JWT (JSON Web Tokens): Authentication mechanism for securing API endpoints.
+OpenWeatherMap API: External API used to fetch geolocation data and sunrise/sunset times.
+Behance: Source for UI/UX design inspiration.
+HTML/CSS: Frontend styling and structure.
 Getting Started
-Provide instructions on how to get started with the project. Include details on installation, setup, and usage.
+Prerequisites
+Before running the application, make sure you have the following software installed on your machine:
 
+Java Development Kit (JDK)
+Node.js
+npm (Node Package Manager)
 Installation
-Step 1
-Step 2
-Step 3
-Usage
-Explain how to use the project, including any necessary configurations or commands.
+Clone the repository:
 
 bash
 Copy code
-# Example command or code snippet
+git clone https://github.com/your-username/solar-watch.git
+Navigate to the project directory:
+
+bash
+Copy code
+cd solar-watch
+Install backend dependencies:
+
+bash
+Copy code
+# Using Maven
+mvn install
+Install frontend dependencies:
+
+bash
+Copy code
+# Using npm
+npm install
+Usage
+Start the backend server:
+
+bash
+Copy code
+mvn spring-boot:run
+Start the frontend development server:
+
+bash
+Copy code
 npm start
-Contributing
-Outline guidelines for contributing to the project. Include instructions on how to submit bug reports, feature requests, or pull requests. Specify any coding standards or contribution guidelines.
-
-License
-Indicate the project's license and provide a link to the full license text if applicable.
-
-This project is licensed under the License Name - see the LICENSE.md file for details.
-
-Acknowledgements
-Acknowledge any individuals, organizations, or resources that contributed to the project or inspired its development.
-
-Name - Description
+Open your web browser and navigate to http://localhost:3000 to access the application.
